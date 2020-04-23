@@ -1,0 +1,10 @@
+<h2>Search Cars</h2>
+<form action="/cars" method="GET">
+    <label>License Plate</label>
+    <input type="text" name="licensePlate" value="<%= searchOptions.licensePlate %>">
+    <button type="submit">Search</button>
+</form>
+<br>
+<% cars.forEach(car => { %>
+<div><%= car.licensePlate %></div>
+<% }) %>
