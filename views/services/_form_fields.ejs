@@ -1,0 +1,28 @@
+<div>
+    <label>Service Date</label>
+    <input type="date" name="serviceDate"
+        value='<%= service.serviceDate == null ? '':
+        service.serviceDate.toISOString().split('T')[0] %>'>
+</div>
+
+<div>
+    <!-- Hivatkozas a mar letrehozott autokra  -->
+    <label>License Plate</label>
+    <select name='serviceCar'>
+    <% cars.forEach(car => { %>
+    <% if (car.id === service.serviceCar) { %>
+        <option selected label="<%= car.licensePlate %>" value="<%= car.id %>">
+    <% } else { %>
+        <option selected label="<%= car.licensePlate %>" value="<%= car.id %>"></option>
+        <% } %>  
+    <% }) %>
+    </select>
+</div>
+<div>
+    <label>Odometer</label>
+    <input type="number" name="serviceOdometer" min="1" value='<%= service.serviceOdometer %>'>
+</div>
+<div>
+    <label>Description</label>
+    <textarea name="serviceDescription"><%= service.serviceDescription %></textarea>
+</div>

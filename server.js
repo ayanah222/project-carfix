@@ -9,6 +9,7 @@
 
  const indexRouter = require('./routes/index')
  const carRouter = require('./routes/cars')
+ const serviceRouter = require('./routes/services')
 
  app.set('view engine', 'ejs')
  app.set('views', __dirname + '/views')
@@ -26,5 +27,6 @@
 
  app.use('/', indexRouter)
  app.use('/cars', carRouter)
-
+ app.use('/services', serviceRouter)
+ 
  app.listen(process.env.PORT || 3000)
