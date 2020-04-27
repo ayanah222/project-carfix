@@ -22,6 +22,10 @@ const carSchema = new mongoose.Schema({
     carYear: {                     
         type: Date,
         required: true
+    },
+    carOwner: {                     
+        type: String,
+        required: true
     }
 })
 

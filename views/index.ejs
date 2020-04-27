@@ -1,1 +1,13 @@
-Middle
+<h2>Recently added services</h2>
+<div>
+    <% services.forEach(service => { %>
+    <div>
+        <%= service.serviceCar %>
+        <%= '-' %>
+        <%= service.serviceDate.toISOString().split('T')[0] %>
+        <%= '-' %>
+        <%= service.serviceOdometer %>
+        <%= 'Km' %>
+    </div> 
+    <% }) %>
+</div>

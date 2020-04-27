@@ -6,7 +6,23 @@ const Car = require('../models/car')
 
 // All Services Route (GET METHOD)
 router.get('/', async (req, res) => {
-    res.send('All Services')
+    let query = Service.find()
+    if (req.query.serviceBefore != null && req.query.serviceBefore != '') {
+        query =  query.lte('serviceDate', req.query.serviceBefore)
+    }
+    if (req.query.serviceAfter != null && req.query.serviceAfter != '') {
+        query =  query.gte('serviceDate', req.query.serviceAfter)
+    }
+    try{
+        const services = await query.exec()
+        res.render('services/index', {
+        services: services,
+        searchOptions: req.query
+            })
+    } catch {
+        res.redirect('/')
+    }
+    
 })
 
 // New Service Route (GET METHOD)

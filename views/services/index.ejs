@@ -1,0 +1,26 @@
+<h2>Search Services</h2>
+<form action="/services" method="GET">
+    <div>
+        <label>Serviced After</label>
+        <input type="date" name="serviceAfter" value="<%= searchOptions.serviceAfter %>">
+    </div>
+    <div>
+        <label>Serviced Before</label>
+        <input type="date" name="serviceBefore" value="<%= searchOptions.serviceBefore %>">
+    </div>
+    <button type="submit">Search</button>
+</form>
+
+<!-- Ezt itt javitani kell, mert egyelore csak ID-kat hoz le. -->
+<div>
+    <% services.forEach(service => { %>
+    <div>
+        <%= service.serviceCar %>
+        <%= '-' %>
+        <%= service.serviceDate.toISOString().split('T')[0] %>
+        <%= '-' %>
+        <%= service.serviceOdometer %>
+        <%= 'Km' %>
+    </div> 
+    <% }) %>
+</div>

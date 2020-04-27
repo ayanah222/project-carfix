@@ -40,19 +40,25 @@ router.post('/', upload.single('carPicture'), async (req, res) => {
     const fileName = req.file != null ? req.file.filename : null
     const car = new Car({
         licensePlate: req.body.licensePlate,
+        carOwner:     req.body.carOwner,
         carMake:      req.body.carMake,
         carType:      req.body.carType,
         carFuel:      req.body.carFuel,
         carYear:      req.body.carYear,
-        carPicture:  fileName
+        carPictureName:  fileName
     })
     try {
       const newCar = await car.save()
      // res.redirect(`cars/${newCar.id}`) // NOT YET IMPLEMENTED
       res.redirect('cars') // TEMPORARY REDIRECTION
     } catch {
-        if (car.carPicture != null) {
-            removeCarPicture(car.carPicture)
+        if (car.carPictureName != null) {
+            removeCarPicture(car.carPictureName),
+            console.log('File deleted!')
+        }
+        else
+        {
+            console.log('No file uploaded!')
         }
         
         res.render('cars/new', {
@@ -64,7 +70,7 @@ router.post('/', upload.single('carPicture'), async (req, res) => {
 })
 
 function removeCarPicture(fileName) {
-    fs.unlink(path.join(uploadPath, fileName), err => {
+    fs.unlink(path.join(uploadPath, fileName), err => { // Ez valamiért nem működik, valószinüleg azért, mert nem async functionként fut a siterender
         if (err) console.error(err)
     })
 }
