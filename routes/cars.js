@@ -1,17 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Car = require('../models/car')
-const multer = require('multer')
-const path = require('path')
-const fs = require('fs')
-const uploadPath = path.join('public', Car.carImageBasePath) //Össze joinolja a két elérési útvonalat
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif'] //Elfogadott fájl tipusok
-const upload = multer({
-    dest: uploadPath,
-    fileFilter: (req, file, callback) => {
-        callback(null, imageMimeTypes.includes(file.mimetype))
-    }
-})
 
 // All Cars Route (GET METHOD)
 router.get('/', async (req, res) => {
@@ -36,31 +26,22 @@ router.get('/new', (req, res) => {
 })
 
 // Create Car Route (POST METHOD)
-router.post('/', upload.single('carPicture'), async (req, res) => {
-    const fileName = req.file != null ? req.file.filename : null
-    const car = new Car({
+router.post('/', async (req, res) => {
+     const car = new Car({
         licensePlate: req.body.licensePlate,
         carOwner:     req.body.carOwner,
         carMake:      req.body.carMake,
         carType:      req.body.carType,
         carFuel:      req.body.carFuel,
-        carYear:      req.body.carYear,
-        carPictureName:  fileName
+        carYear:      req.body.carYear
     })
+    saveCarImage(car, req.body.carImage)
+
     try {
       const newCar = await car.save()
      // res.redirect(`cars/${newCar.id}`) // NOT YET IMPLEMENTED
       res.redirect('cars') // TEMPORARY REDIRECTION
-    } catch {
-        if (car.carPictureName != null) {
-            removeCarPicture(car.carPictureName),
-            console.log('File deleted!')
-        }
-        else
-        {
-            console.log('No file uploaded!')
-        }
-        
+    } catch {        
         res.render('cars/new', {
         car: car,
         errorMessage: 'Error creating Car'
@@ -69,10 +50,13 @@ router.post('/', upload.single('carPicture'), async (req, res) => {
     
 })
 
-function removeCarPicture(fileName) {
-    fs.unlink(path.join(uploadPath, fileName), err => { // Ez valamiért nem működik, valószinüleg azért, mert nem async functionként fut a siterender
-        if (err) console.error(err)
-    })
+function saveCarImage(car, carImageEncoded) {
+    if (carImageEncoded == null) return
+    const carImage = JSON.parse(carImageEncoded)
+    if (carImage != null && imageMimeTypes.includes(carImage.type)) {
+     car.carImage = new Buffer.from(carImage.data, 'base64')
+     car.carImageType = carImage.type   
+    }
 }
 
 module.exports = router
