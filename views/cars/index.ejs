@@ -15,4 +15,8 @@
     <%= '-' %>
     <%= car.carType %>
 </div>
+<a href="/cars/<%= car.id %>">View</a>
+<a href="/cars/<%= car.id %>/edit">Edit</a>
+<%- include('../partials/deleteForm', 
+            { url: `/cars/${car.id}` }) %>
 <% }) %>

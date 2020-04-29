@@ -11,11 +11,11 @@
     <button type="submit">Search</button>
 </form>
 
-<!-- Ezt itt javitani kell, mert egyelore csak ID-kat hoz le. -->
+<!-- Ezt itt javitani kell, mert egyelore nem hoz le rendszamot. -->
 <div>
     <% services.forEach(service => { %>
     <div>
-        <%= service.serviceCar %>
+        <%= car.licensePlate %>
         <%= '-' %>
         <%= service.serviceDate.toISOString().split('T')[0] %>
         <%= '-' %>

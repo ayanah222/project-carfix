@@ -1,0 +1,18 @@
+<h2><%= car.licensePlate %></h2>
+<a href="/cars/<%= car.id %>/edit">Edit</a>
+<%- include('../partials/deleteForm',
+    { url: `/cars/${car.id}`  }) %>
+
+<% if (servicesByCar.length > 0) { %>
+ <h2>Services by Car</h2>
+ <% servicesByCar.forEach(service => { %>
+    <div>
+        <%= car.licensePlate %>
+        <%= '-' %>
+        <%= service.serviceDate.toISOString().split('T')[0] %>
+        <%= '-' %>
+        <%= service.serviceOdometer %>
+        <%= 'Km' %>
+    </div> 
+    <% }) %>
+<% } %>

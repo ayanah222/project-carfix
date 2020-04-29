@@ -1,4 +1,5 @@
 const mongoose = require ('mongoose')
+const Service = require('./service')
 
 const carSchema = new mongoose.Schema({
     licensePlate: {                     //Index van rajta, Unique kulcsal
@@ -41,5 +42,35 @@ carSchema.virtual('carImagePath').get(function() {
     }
 }
 )
+carSchema.pre('remove', function(next) {
+    Service.find({ serviceCar: this.id }, (err, services) => {
+        if (err) {
+            next(err)
+        } else if (services.length > 0) {
+            next(new Error('This car has services still'))
+            console.log('Service record detected, preventing deletion of car!')
+        } else {
+            next()
+            console.log('No service record detected, deleting car!')
+        }
+    })
+})
+
+// Alternativ megoldás, törlésnél a szerviz rekordok is törlésre kerülnek:
+
+// carSchema.pre('remove', function(next) {
+//     Service.find({serviceCar: this.id}, (err, services) => {
+//         if (err) {
+//             next (err)
+//         } else if (services.length > 0) {
+//             services.forEach(service => service.remove())
+//             next()
+//             console.log('Service records detected, deleting service records as well!')
+//         } else {
+//             next()
+//             console.log('No service record detected, deleting car!')
+//         }
+//     })
+// })
 
 module.exports = mongoose.model('Car', carSchema)
