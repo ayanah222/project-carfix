@@ -15,7 +15,8 @@
             <%= service.serviceOdometer %>
             <%= 'Km' %>
         </div>
-    <a href="/services/<%= service.id %>">View</a>
-    <a href="/services/<%= service.id %>/edit">Edit</a>
+    <div class="btn-row">  
+        <a class="btn btn-primary" href="/services/<%= service.id %>">View</a>
+        <a class="btn btn-primary" href="/services/<%= service.id %>/edit">Edit</a>
+    </div>
     <% }) %>
-</div>
