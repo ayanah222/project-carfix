@@ -1,4 +1,4 @@
-<h2>Search Cars</h2>
+<h2 class="page-header">Search Cars</h2>
 <form action="/cars" method="GET">
     <label>License plate</label>
     <input type="text" name="licensePlate" value="<%= searchOptions.licensePlate %>">
@@ -15,8 +15,10 @@
     <%= '-' %>
     <%= car.carType %>
 </div>
-<a href="/cars/<%= car.id %>">View</a>
-<a href="/cars/<%= car.id %>/edit">Edit</a>
-<%- include('../partials/deleteForm', 
-            { url: `/cars/${car.id}` }) %>
+<div class="btn-row">
+    <a class="btn btn-primary" href="/cars/<%= car.id %>">View</a>
+    <a class="btn btn-primary" href="/cars/<%= car.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm', 
+                { url: `/cars/${car.id}` }) %>
+</div>
 <% }) %>

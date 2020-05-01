@@ -1,5 +1,5 @@
-<h2><%= service.serviceDate.toISOString().split('T')[0] %></h2>
-<h3>Car details:</h3>
+<h2 class="page-header"><%= service.serviceDate.toISOString().split('T')[0] %></h2>
+<h3 class="page-header">Car details:</h3>
 <div>License plate: <%= service.serviceCar.licensePlate %></div>
 <div>Owner: <%= service.serviceCar.carOwner %></div>
 <div>Make: <%= service.serviceCar.carMake %></div>
@@ -7,7 +7,7 @@
 <div>Make year: <%= service.serviceCar.carYear %></div>
 <div>Fuel type: <%= service.serviceCar.carFuel %></div>
 <div>Outstanding issues: <%= service.serviceCar.carIssues %></div>
-<h3>Service details:</h3>
+<h3 class="page-header">Service details:</h3>
 <div>Odometer: <%= service.serviceOdometer %></div>
 <div>Description: <%= service.serviceDescription %></div>
 <a href="/services/<%= service.id %>/edit">Edit</a>
