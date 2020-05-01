@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
         query =  query.gte('serviceDate', req.query.serviceAfter)
     }
     try{
-        const services = await query.exec()
+        const services = await query.populate('serviceCar').exec()
         res.render('services/index', {
         services: services,
         searchOptions: req.query
@@ -41,23 +41,99 @@ router.post('/', async (req, res) => {
     })
     try{
         const newService = await service.save()
-        // res.redirect(`services/${newService.id}`) // NOT YET IMPLEMENTED
-      res.redirect('services') // TEMPORARY REDIRECTION
+        res.redirect(`services/${newService.id}`)
     } catch {
         renderNewPage(res, service, true)
     }
     })
-   
+  
+// Show Service Route
+router.get('/:id', async (req, res) => {
+    try {
+        const service = await Service.findById(req.params.id)
+                                     .populate('serviceCar')
+                                     .exec()
+        res.render('services/show', { service: service })
+    } catch {
+        res.redirect('/')
+    }
+})
 
-async function renderNewPage(res, service, hasError = false) {
+// Edit Service Route
+router.get('/:id/edit', async (req, res) => {
+    try {
+        const service = await Service.findById(req.params.id)
+      renderEditPage(res, service)
+    } catch {
+      res.redirect('/')
+    }
+    
+})
+
+// Update Service Route
+router.put('/:id', async (req, res) => {
+    let service 
+      try{
+        service = await Service.findById(req.params.id)
+        service.serviceCar = req.body.serviceCar
+        service.serviceDate = new Date(req.body.serviceDate)
+        service.serviceOdometer = req.body.serviceOdometer
+        service.serviceDescription = req.body.serviceDescription
+        await service.save()
+        res.redirect(`/services/${service.id}`)
+         } catch {
+             if (service != null) {
+                renderEditPage(res, service, true)
+             } else {
+                 redirect('/')
+             }
+           }
+    })
+// Delete Service Route
+router.delete('/:id', async (req, res) => {
+    let service
+      try {
+        service = await Service.findById(req.params.id)
+        await service.remove()
+        res.redirect('/services')
+    } catch
+     {
+        if (service != null) {
+        res.render('services/show', {
+            service: service,
+            errorMessage: 'Could not remove service'
+        })
+    }   else {
+        res.redirect('/')
+    }
+  }
+})
+
+async function renderNewPage(res, service, hasError = false) 
+{
+renderFormPage(res, service, 'new', hasError) 
+}
+
+async function renderEditPage(res, service, hasError = false) 
+{
+renderFormPage(res, service, 'edit', hasError)
+}
+
+async function renderFormPage(res, service, form, hasError = false) {
     try {
     const cars = await Car.find({})
     const params = {
         cars:  cars,
       service: service
     }
-    if (hasError) params.errorMessage = 'Error creating Service'
-    res.render('services/new', params)
+    if (hasError) {
+        if (form === 'edit') {
+            params.errorMessage = 'Error Updating Service'
+        } else {
+            params.errorMessage = 'Error Creating Service'
+        }
+    }
+    res.render(`services/${form}`, params)
 } catch {
     res.redirect('/services')
     }

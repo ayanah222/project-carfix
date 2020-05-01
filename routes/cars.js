@@ -34,7 +34,8 @@ router.post('/', async (req, res) => {
         carMake:      req.body.carMake,
         carType:      req.body.carType,
         carFuel:      req.body.carFuel,
-        carYear:      req.body.carYear
+        carYear:      req.body.carYear,
+        carIssues:    req.body.carIssues
     })
     saveCarImage(car, req.body.carImage)
 
@@ -48,7 +49,7 @@ router.post('/', async (req, res) => {
         })
     }
 })
-
+// View Car Route
 router.get('/:id', async (req, res) => {
     try {
         const car = await Car.findById(req.params.id)
@@ -61,7 +62,7 @@ router.get('/:id', async (req, res) => {
         res.redirect('/')
     }
 })
-
+// Edit Car Route
 router.get('/:id/edit', async (req, res) => {
     try {
         const car = await Car.findById(req.params.id)
@@ -71,7 +72,7 @@ router.get('/:id/edit', async (req, res) => {
     }
     
 })
-
+// Update Car Route
 router.put('/:id', async (req, res) => {
     // saveCarImage(car, req.body.carImage) // Ezt javitani kell
     let car
@@ -82,7 +83,11 @@ router.put('/:id', async (req, res) => {
         car.carMake =      req.body.carMake,
         car.carType =      req.body.carType,
         car.carFuel =      req.body.carFuel,
-        car.carYear =      req.body.carYear
+        car.carYear =      req.body.carYear,
+        car.carIssues =    req.body.carIssues
+        if (req.body.carImage != null && req.body.carImage !== '') {
+            saveCarImage(car, req.body.carImage)
+        }
         await car.save()
         res.redirect(`/cars/${car.id}`)
     } catch {
@@ -97,7 +102,7 @@ router.put('/:id', async (req, res) => {
         
     }
 })
-
+// Delete Car Route
 router.delete('/:id', async (req, res) => {
     let car
     try {
@@ -115,11 +120,12 @@ router.delete('/:id', async (req, res) => {
 
 
 function saveCarImage(car, carImageEncoded) {
-    if (carImageEncoded == null) return
+    if (carImageEncoded == null)
+    return
     const carImage = JSON.parse(carImageEncoded)
     if (carImage != null && imageMimeTypes.includes(carImage.type)) {
      car.carImage = new Buffer.from(carImage.data, 'base64')
-     car.carImageType = carImage.type   
+     car.carImageType = carImage.type
     }
 }
 

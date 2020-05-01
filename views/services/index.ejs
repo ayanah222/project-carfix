@@ -11,16 +11,25 @@
     <button type="submit">Search</button>
 </form>
 
-<!-- Ezt itt javitani kell, mert egyelore nem hoz le rendszamot. -->
 <div>
     <% services.forEach(service => { %>
     <div>
-        <%= service.serviceCar %>
+        <%= service.serviceCar.licensePlate %>
+        <%= '-' %>
+        <%= service.serviceCar.carOwner %>
+        <%= '-' %>
+        <%= service.serviceCar.carMake %>
+        <%= '-' %>
+        <%= service.serviceCar.carType %>
         <%= '-' %>
         <%= service.serviceDate.toISOString().split('T')[0] %>
         <%= '-' %>
         <%= service.serviceOdometer %>
         <%= 'Km' %>
     </div> 
-    <% }) %>
+    <a href="/services/<%= service.id %>">View</a>
+    <a href="/services/<%= service.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm', 
+            { url: `/services/${service.id}` }) %>
+<% }) %>
 </div>

@@ -6,14 +6,14 @@
 </div>
 
 <div>
-    <!-- Hivatkozas a mar letrehozott autokra  -->
+    <!-- Valami hibás, editnél nem jó értéket hoz, mindennél ugyan az  -->
     <label>License Plate</label>
     <select name='serviceCar'>
     <% cars.forEach(car => { %>
-    <% if (car.id === service.serviceCar) { %>
+    <% if (car.id == service.serviceCar) { %>
         <option selected label="<%= car.licensePlate %>" value="<%= car.id %>">
     <% } else { %>
-        <option selected label="<%= car.licensePlate %>" value="<%= car.id %>">
+        <option label="<%= car.licensePlate %>" value="<%= car.id %>">
         <% } %>  
     <% }) %>
     </select>

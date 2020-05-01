@@ -1,13 +1,21 @@
 <h2>Recently added services</h2>
 <div>
     <% services.forEach(service => { %>
-    <div>
-        <%= service.serviceCar %>
-        <%= '-' %>
-        <%= service.serviceDate.toISOString().split('T')[0] %>
-        <%= '-' %>
-        <%= service.serviceOdometer %>
-        <%= 'Km' %>
-    </div> 
+        <div>
+            <%= service.serviceCar.licensePlate %>
+            <%= '-' %>
+            <%= service.serviceCar.carOwner %>
+            <%= '-' %>
+            <%= service.serviceCar.carMake %>
+            <%= '-' %>
+            <%= service.serviceCar.carType %>
+            <%= '-' %>
+            <%= service.serviceDate.toISOString().split('T')[0] %>
+            <%= '-' %>
+            <%= service.serviceOdometer %>
+            <%= 'Km' %>
+        </div>
+    <a href="/services/<%= service.id %>">View</a>
+    <a href="/services/<%= service.id %>/edit">Edit</a>
     <% }) %>
 </div>

@@ -19,7 +19,7 @@ const carSchema = new mongoose.Schema({
         required: true
     },
     carYear: {                     
-        type: Date,
+        type: String,
         required: true
     },
     carOwner: {                     
@@ -33,6 +33,9 @@ const carSchema = new mongoose.Schema({
     carImageType: {                     
         type: String,
         required: false
+    },
+    carIssues: {                     
+        type: String,
     }
 })
 

@@ -1,8 +1,11 @@
 <h2><%= car.licensePlate %></h2>
-<a href="/cars/<%= car.id %>/edit">Edit</a>
-<%- include('../partials/deleteForm',
-    { url: `/cars/${car.id}`  }) %>
-
+<img width="150" heigh="100" src="<%= car.carImagePath %>">
+<div>Car owner: <%= car.carOwner %></div>
+<div>Car make: <%= car.carMake %></div>
+<div>Car type: <%= car.carType %></div>
+<div>Manufacturing year: <%= car.carYear %></div>
+<div>Fuel: <%= car.carFuel %></div>
+<div>Outstanding issues: <%= car.carIssues %></div>
 <% if (servicesByCar.length > 0) { %>
  <h2>Services by Car</h2>
  <% servicesByCar.forEach(service => { %>
@@ -16,3 +19,7 @@
     </div> 
     <% }) %>
 <% } %>
+<br>
+<a href="/cars/<%= car.id %>/edit">Edit</a>
+<%- include('../partials/deleteForm',
+    { url: `/cars/${car.id}`  }) %>
