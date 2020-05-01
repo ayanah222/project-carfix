@@ -63,6 +63,8 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/edit', async (req, res) => {
     try {
         const service = await Service.findById(req.params.id)
+                                     .populate('serviceCar')
+                                     .exec()
       renderEditPage(res, service)
     } catch {
       res.redirect('/')

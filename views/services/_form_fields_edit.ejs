@@ -18,6 +18,10 @@
     </select>
 </div>
 <div>
+    <label>Outstanding Issues</label>
+    <textarea readonly name="carIssues"><%= service.serviceCar.carIssues %></textarea>
+</div>
+<div>
     <label>Odometer</label>
     <input type="number" name="serviceOdometer" min="1" value='<%= service.serviceOdometer %>'>
 </div>
