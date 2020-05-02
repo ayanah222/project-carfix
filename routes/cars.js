@@ -10,6 +10,9 @@ router.get('/', async (req, res) => {
     if(req.query.licensePlate != null && req.query.licensePlate !== '') {
         searchOptions.licensePlate = new RegExp(req.query.licensePlate, 'i')
     }
+    if(req.query.carMake != null && req.query.carMake !== '') {
+        searchOptions.carMake = new RegExp(req.query.carMake, 'i')
+    }
     try {
     const cars = await Car.find(searchOptions)
     res.render('cars/index',{

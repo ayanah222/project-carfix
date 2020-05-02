@@ -10,8 +10,10 @@
 <h3 class="page-header">Service details:</h3>
 <div>Odometer: <%= service.serviceOdometer %></div>
 <div>Description: <%= service.serviceDescription %></div>
-<a href="/services/<%= service.id %>/edit">Edit</a>
+<div class="form-row form-row-end">
+<a class="btn btn-primary" href="/services/<%= service.id %>/edit">Edit</a>
 <%- include('../partials/deleteForm',
     { url: `/services/${service.id}`  }) %>
-<a href="/cars/<%= service.serviceCar.id %>">View Car</a>
+<a class="btn btn-primary" href="/cars/<%= service.serviceCar.id %>">View Car</a>
+</div>
 

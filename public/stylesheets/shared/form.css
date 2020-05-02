@@ -56,7 +56,7 @@
 
 .form-item textarea:read-only {
     height: 100%;
-    /* resize: none; */
+     /* resize: none; */
 }
 
 .form-item select option {

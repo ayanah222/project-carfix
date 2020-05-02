@@ -18,6 +18,7 @@
 <div>
     <% services.forEach(service => { %>
     <div>
+        <h3>
         <%= service.serviceCar.licensePlate %>
         <%= '-' %>
         <%= service.serviceCar.carOwner %>
@@ -30,6 +31,7 @@
         <%= '-' %>
         <%= service.serviceOdometer %>
         <%= 'Km' %>
+        </h3>
     </div>
     <div class="btn-row"> 
     <a class="btn btn-primary" href="/services/<%= service.id %>">View</a>

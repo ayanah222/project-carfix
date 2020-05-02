@@ -9,7 +9,7 @@
         <label>License Plate</label>
         <select name='serviceCar'>
         <% cars.forEach(car => { %>
-        <% if (car.id == service.serviceCar) { %>
+        <% if (car.id === String(service.serviceCar.id)) { %>
         <option selected label="<%= car.licensePlate %>" value="<%= car.id %>">
         <% } else { %>
         <option label="<%= car.licensePlate %>" value="<%= car.id %>">
