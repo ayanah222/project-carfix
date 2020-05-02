@@ -6,8 +6,13 @@
 <div>Make year: <%= car.carYear %></div>
 <div>Fuel: <%= car.carFuel %></div>
 <div>Outstanding issues: <%= car.carIssues %></div>
+<div class="btn-row">
+<a class="btn btn-primary" href="/cars/<%= car.id %>/edit">Edit</a>
+<%- include('../partials/deleteForm',
+    { url: `/cars/${car.id}`  }) %>
+</div>
 <% if (servicesByCar.length > 0) { %>
- <h2>Services by Car</h2>
+ <h2 class="page-header">Services by Car</h2>
  <% servicesByCar.forEach(service => { %>
     <div>
         <%= car.licensePlate %>
@@ -20,6 +25,3 @@
     <% }) %>
 <% } %>
 <br>
-<a href="/cars/<%= car.id %>/edit">Edit</a>
-<%- include('../partials/deleteForm',
-    { url: `/cars/${car.id}`  }) %>

@@ -1,8 +1,14 @@
 <h2 class="page-header">Search Cars</h2>
 <form action="/cars" method="GET">
+<div class="form-row">
+    <div class="form-item">
     <label>License plate</label>
     <input type="text" name="licensePlate" value="<%= searchOptions.licensePlate %>">
-    <button type="submit">Search</button>
+    </div>
+</div>
+<div class="form-row form-row-end">
+    <button class="btn btn-primary" type="submit">Search</button>
+</div>
 </form>
 <br>
 <% cars.forEach(car => { %>

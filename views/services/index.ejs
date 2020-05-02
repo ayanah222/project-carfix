@@ -1,16 +1,20 @@
 <h2 class="page-header">Search Services</h2>
 <form action="/services" method="GET">
-    <div>
-        <label>Serviced After</label>
-        <input type="date" name="serviceAfter" value="<%= searchOptions.serviceAfter %>">
+    <div class="form-row">
+        <div class="form-item">
+            <label>Serviced After</label>
+            <input type="date" name="serviceAfter" value="<%= searchOptions.serviceAfter %>">
+        </div>
+        <div class="form-item">
+            <label>Serviced Before</label>
+            <input type="date" name="serviceBefore" value="<%= searchOptions.serviceBefore %>">
+        </div>
     </div>
-    <div>
-        <label>Serviced Before</label>
-        <input type="date" name="serviceBefore" value="<%= searchOptions.serviceBefore %>">
+    <div class="form-row form-row-end">
+        <button class="btn btn-primary" type="submit">Search</button>
     </div>
-    <button type="submit">Search</button>
 </form>
-
+<br>
 <div>
     <% services.forEach(service => { %>
     <div>
