@@ -44,7 +44,10 @@ router.post('/', async (req, res) => {
         carType:      req.body.carType,
         carFuel:      req.body.carFuel,
         carYear:      req.body.carYear,
-        carIssues:    req.body.carIssues
+        carIssues:    req.body.carIssues,
+        carEngineKw:  req.body.carEngineKw,
+        carEngineCc:  req.body.carEngineCc,
+        carVin:       req.body.carVin  
     })
     if (
         req.body.carImage =! null && req.query.carImage !== ''
@@ -96,7 +99,10 @@ router.put('/:id', async (req, res) => {
         car.carType =      req.body.carType,
         car.carFuel =      req.body.carFuel,
         car.carYear =      req.body.carYear,
-        car.carIssues =    req.body.carIssues
+        car.carIssues =    req.body.carIssues,
+        car.carEngineKw =  req.body.carEngineKw,
+        car.carEngineCc =  req.body.carEngineCc,
+        car.carVin =       req.body.carVin
         if (req.body.carImage != null && req.body.carImage !== '') {
             saveCarImage(car, req.body.carImage)
         }

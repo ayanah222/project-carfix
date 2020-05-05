@@ -1,16 +1,37 @@
 <h2 class="page-header"><%= car.licensePlate %></h2>
-<img width="150" heigh="100" src="<%= car.carImagePath %>">
-<div>Car owner: <%= car.carOwner %></div>
-<div>Car make: <%= car.carMake %></div>
-<div>Car type: <%= car.carType %></div>
-<div>Make year: <%= car.carYear %></div>
-<div>Fuel: <%= car.carFuel %></div>
-<div>Outstanding issues: <%= car.carIssues %></div>
-<div class="btn-row">
-    <a class="btn btn-primary" href="/cars/<%= car.id %>/edit">Edit</a>
-    <%- include('../partials/deleteForm',
-        { url: `/cars/${car.id}`  }) %>
+<div class="car-details">
+    <div>
+        <img width="300" heigh="200" src="<%= car.carImagePath %>">
+        <div class="car-details-btn-grid">
+            <a class="btn btn-primary" href="/cars/<%= car.id %>/edit">Edit</a>
+            <%- include('../partials/deleteForm',
+                { url: `/cars/${car.id}`  }) %>
+        </div>
+    </div>
+    <div class="car-details-grid">
+        <div class="car-details-label">VIN:</div>
+        <div><%= car.carVin %></div>
+        <div class="car-details-label">Owner:</div>
+        <div><%= car.carOwner %></div>
+        <div class="car-details-label">Car Make:</div>
+        <div><%= car.carMake %></div>
+        <div class="car-details-label">Car Type:</div>
+        <div><%= car.carType %></div>
+        <div class="car-details-label">Car Engine (Kilowatts):</div>
+        <div><%= car.carEngineKw %></div>
+        <div class="car-details-label">Car Engine (CC):</div>
+        <div><%= car.carEngineCc %></div>
+        <div class="car-details-label">Make Year:</div>
+        <div><%= car.carYear %></div>
+        <div class="car-details-label">Fuel:</div>
+        <div><%= car.carFuel %></div>
+        <% if (car.carIssues.length > 0) { %>
+        <div class="car-details-label">Outstanding issues:</div>
+        <div><%= car.carIssues %></div>
+        <% } %>
+    </div>
 </div>
+
 <% if (servicesByCar.length > 0) { %>
  <h2 class="page-header">Services by Car</h2>
  <% servicesByCar.forEach(service => { %>
@@ -29,7 +50,7 @@
         <a class="btn btn-primary" href="/services/<%= service.id %>/edit">Edit</a>
         <%- include('../partials/deleteForm', 
                 { url: `/services/${service.id}` }) %>
-        </div> 
+    </div> 
     <% }) %>
 <% } %>
 <br>

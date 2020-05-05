@@ -1,15 +1,36 @@
 <h2 class="page-header"><%= service.serviceDate.toISOString().split('T')[0] %></h2>
 <h3 class="page-header">Car details:</h3>
-<div>License plate: <%= service.serviceCar.licensePlate %></div>
-<div>Owner: <%= service.serviceCar.carOwner %></div>
-<div>Make: <%= service.serviceCar.carMake %></div>
-<div>Type: <%= service.serviceCar.carType %></div>
-<div>Make year: <%= service.serviceCar.carYear %></div>
-<div>Fuel type: <%= service.serviceCar.carFuel %></div>
-<div>Outstanding issues: <%= service.serviceCar.carIssues %></div>
+<div class="car-details-grid">
+    <div class="car-details-label">License plate:</div>
+    <div><%= service.serviceCar.licensePlate %></div>
+    <div class="car-details-label">VIN:</div>
+    <div><%= service.serviceCar.carVin %></div>
+    <div class="car-details-label">Owner:</div>
+    <div><%= service.serviceCar.carOwner %></div>
+    <div class="car-details-label">Car Make:</div>
+    <div><%= service.serviceCar.carMake %></div>
+    <div class="car-details-label">Car Type:</div>
+    <div><%= service.serviceCar.carType %></div>
+    <div class="car-details-label">Car Engine (Kilowatts):</div>
+    <div><%= service.serviceCar.carEngineKw %></div>
+    <div class="car-details-label">Car Engine (CC):</div>
+    <div><%= service.serviceCar.carEngineCc %></div>
+    <div class="car-details-label">Make Year:</div>
+    <div><%= service.serviceCar.carYear %></div>
+    <div class="car-details-label">Fuel Type:</div>
+    <div><%= service.serviceCar.carFuel %></div>
+    <% if (service.serviceCar.carIssues.length > 0) { %>
+    <div class="car-details-label">Outstanding Issues:</div>
+    <div><%= service.serviceCar.carIssues %></div>
+    <% } %>
+</div>
 <h3 class="page-header">Service details:</h3>
-<div>Odometer: <%= service.serviceOdometer %></div>
-<div>Description: <%= service.serviceDescription %></div>
+<div class="service-details-grid">
+    <div class="service-details-label">Odometer:</div>
+    <div><%= service.serviceOdometer %></div>
+    <div class="service-details-label">Description:</div>
+    <div><%= service.serviceDescription %></div>
+</div>
 <div class="form-row form-row-end">
 <a class="btn btn-primary" href="/services/<%= service.id %>/edit">Edit</a>
 <%- include('../partials/deleteForm',

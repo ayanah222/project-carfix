@@ -36,6 +36,19 @@ const carSchema = new mongoose.Schema({
     },
     carIssues: {                     
         type: String,
+        required: false
+    },
+    carEngineKw: {
+        type: Number,
+        required: false
+    },
+    carEngineCc: {
+        type: Number,
+        required: false
+    },
+    carVin: {           //Jővőbeli upgrade: vehicle-identification-number modult bevezetni
+        type: String,
+        required: false
     }
 })
 

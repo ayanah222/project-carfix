@@ -8,7 +8,12 @@
         <input type="text" name="carOwner" value='<%= car.carOwner %>'>
     </div>
 </div>
-
+<div class="form-row">
+    <div class="form-item">
+        <label>VIN</label>
+        <input type="text" name="carVin" value='<%= car.carVin %>'>
+    </div>
+</div>
 <div class="form-row">
     <div class="form-item">
         <label>Car Make</label>
@@ -19,11 +24,26 @@
         <input type="text" name="carType" value='<%= car.carType %>'>
     </div>
 </div>
-
+<div class="form-row">
+    <div class="form-item">
+        <label>Car Engine (Kilowatts)</label>
+        <input type="text" name="carEngineKw" value='<%= car.carEngineKw %>'>
+    </div>
+    <div class="form-item">
+        <label>Car Engine (CC)</label>
+        <input type="text" name="carEngineCc" value='<%= car.carEngineCc %>'>
+    </div>
+</div>
 <div class="form-row">
     <div class="form-item">
         <label>Fuel Type</label>
-        <input type="text" name="carFuel" value='<%= car.carFuel %>'>
+        <select name="carFuel">
+            <option label="Petrol" value="<%= car.carFuel %>"></option>
+            <option label="Diesel" value="<%= car.carFuel %>"></option>
+            <option label="Hybrid" value="<%= car.carFuel %>"></option>
+            <option label="Electric" value="<%= car.carFuel %>"></option>
+            <option label="LPG" value="<%= car.carFuel %>"></option>
+        </select>
     </div>
     <div class="form-item">
         <label>Make Year</label>
@@ -35,7 +55,9 @@
         <label>Outstanding issues</label>
         <textarea name="carIssues"><%= car.carIssues %></textarea>
     </div>
-    <div class="form-item form-item-no-grow">
+</div>
+    <div class="form-row">
+        <div class="form-item">
         <label>Picture</label>
         <input type="file" name="carImage" class="filepond">
     </div>
