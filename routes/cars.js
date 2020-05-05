@@ -57,7 +57,8 @@ router.post('/', async (req, res) => {
     try {
       const newCar = await car.save()
       res.redirect(`cars/${newCar.id}`)
-    } catch {        
+    } catch(err) {
+        console.log(err)       
         res.render('cars/new', {
         car: car,
         errorMessage: 'Error creating Car'
