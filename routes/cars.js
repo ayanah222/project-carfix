@@ -10,8 +10,14 @@ router.get('/', async (req, res) => {
     if(req.query.licensePlate != null && req.query.licensePlate !== '') {
         searchOptions.licensePlate = new RegExp(req.query.licensePlate, 'i')
     }
+    if(req.query.carOwner != null && req.query.carOwner !== '') {
+        searchOptions.carOwner = new RegExp(req.query.carOwner, 'i')
+    }
     if(req.query.carMake != null && req.query.carMake !== '') {
         searchOptions.carMake = new RegExp(req.query.carMake, 'i')
+    }
+    if(req.query.carType != null && req.query.carType !== '') {
+        searchOptions.carType = new RegExp(req.query.carType, 'i')
     }
     try {
     const cars = await Car.find(searchOptions)
@@ -40,7 +46,10 @@ router.post('/', async (req, res) => {
         carYear:      req.body.carYear,
         carIssues:    req.body.carIssues
     })
-    saveCarImage(car, req.body.carImage)
+    if (
+        req.body.carImage =! null && req.query.carImage !== ''
+    ) 
+    {saveCarImage(car, req.body.carImage)}
 
     try {
       const newCar = await car.save()
