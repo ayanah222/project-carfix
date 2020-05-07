@@ -16,11 +16,11 @@ const carSchema = new mongoose.Schema({
     },
     carFuel: {                     
         type: String,
-        required: true
+        required: false
     },
     carYear: {                     
         type: String,
-        required: true
+        required: false
     },
     carOwner: {                     
         type: String,

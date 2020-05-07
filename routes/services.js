@@ -6,12 +6,17 @@ const Car = require('../models/car')
 
 // All Services Route (GET METHOD)
 router.get('/', async (req, res) => {
-    let query = Service.find()
+    let query = Service.find().sort({ serviceDate: 'desc'})
+    let searchOptions = {}
     if (req.query.serviceBefore != null && req.query.serviceBefore != '') {
         query =  query.lte('serviceDate', req.query.serviceBefore)
     }
     if (req.query.serviceAfter != null && req.query.serviceAfter != '') {
         query =  query.gte('serviceDate', req.query.serviceAfter)
+    }
+    if (req.query.serviceDescription != null && req.query.serviceDescription != '') {               // Javitani!
+        searchOptions.serviceDescription = new RegExp(req.query.serviceDescription, 'i')
+        query =  Service.find(searchOptions).sort({ serviceDate: 'desc'})
     }
     try{
         const services = await query.populate('serviceCar').exec()
